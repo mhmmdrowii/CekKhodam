@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Khodam © @mhmmdrowi</title>
+    <meta name="author" content="@mhmmdrowi">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="https://mhmmdrowi.dev/assets/img/Fav-Rowi.png" sizes="32x32" />
+    <style>
+        /* Mencegah pemilihan teks */
+        body {
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+        }
+    </style>
+</head>
+<body background="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/01/2024/06/05/khodamJPG-2452806090.jpg" style="margin-top: 100px;">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white text-center">
+                        <h4>Cek Khodam © @mhmmdrowi</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="khodamForm">
+                            <div class="form-group">
+                                <label for="name">Masukkan Nama:</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <button type="submit" class="btn btn-secondary btn-block"><b>Cek Khodam</b></button>
+                        </form>
+                        <div class="mt-4" id="result" style="display: none;">
+                            <h5 class="text-center">Hasil Pengecekan Khodam</h5>
+                            <p class="text-center" id="khodamResult"></p>
+                            <p class="text-center" id="khodamDescription"></p>
+                        </div>
+                    </div>
+                    <marquee behavior='alternate' bgcolor='grey' style="color:white;"><b>Follow TikTok: <a href="https://www.tiktok.com/@capricornhuman22" style="color:black;">@capricornhuman22</a></b></marquee>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Mencegah Ctrl + U
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83)) { // Ctrl + U or Ctrl + S
+                return false;
+            }
+        };
+
+        // Mencegah klik kanan
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    
+        document.getElementById('khodamForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            if (name) {
+                // Logic untuk pengecekan khodam berdasarkan nama
+                const { khodam, description } = cekKhodam(name);
+                document.getElementById('khodamResult').innerHTML = `<strong>${khodam}</strong>`;
+                document.getElementById('khodamDescription').innerHTML = description;
+                document.getElementById('result').style.display = 'block';
+            }
+        });
+
+        function cekKhodam(name) {
+            // Logic untuk pengecekan khodam
+            const khodamNames = [
+                'Singa Laut', 'Kosong', 'Macan Garong', 'Kosong', 
+                'Kuda Lumping', 'Kosong', 'Bajing Loncat', 'Kosong', 
+                'Ubur-Ubur Danau', 'Kosong', 'Ayam Sore', 'Kosong',
+                'Kucing Lucu', 'Kosong', 'Gajah Perkasa', 'Kosong',
+                'Burung Hantu', 'Kosong', 'Ikan Paus', 'Kosong',
+                'Serigala Hitam', 'Kosong', 'Kelinci Putih', 'Kosong',
+                'Harimau Putih', 'Kosong', 'Elang Jawa', 'Kosong',
+                'Tupai Terbang', 'Kosong', 'Buaya Darat', 'Kosong',
+                'Monyet Pintar', 'Kosong', 'Gurita Laut', 'Kosong',
+                'Badak Perkasa', 'Kosong', 'Kucing Hutan', 'Kosong',
+                'Burung Merak', 'Kosong', 'Singa Putih', 'Kosong',
+                'Cicak Dinding', 'Kosong', 'Anjing Setia', 'Kosong',
+                'Katak Hijau', 'Kosong', 'Banteng Merah', 'Kosong',
+                'Kambing Gunung', 'Kosong', 'Domba Emas', 'Kosong',
+                'Burung Camar', 'Kosong', 'Ikan Lumba-Lumba', 'Kosong',
+                'Naga Awan', 'Kosong', 'Angsa Emas', 'Kosong',
+                'Kelinci Bulan', 'Kosong', 'Singa Biru', 'Kosong',
+                'Tikus Ladang', 'Kosong', 'Merpati Putih', 'Kosong',
+                'Kadal Gurun', 'Kosong', 'Rubah Perak', 'Kosong',
+                'Gajah Terbang', 'Kosong', 'Kupu-Kupu Raksasa', 'Kosong',
+                'Ular Emas', 'Kosong', 'Buaya Terbang', 'Kosong',
+                'Kura-Kura Hitam', 'Kosong', 'Burung Phoenix', 'Kosong',
+                'Kuda Perak', 'Kosong', 'Lebah Raja', 'Kosong',
+                'Laba-Laba Merah', 'Kosong', 'Kerbau Raksasa', 'Kosong',
+                'Burung Rajawali', 'Kosong', 'Tikus Hutan', 'Kosong',
+                'Lumba-Lumba Pink', 'Kosong', 'Hiu Putih', 'Kosong',
+                'Kucing Ajaib', 'Kosong', 'Gajah Emas', 'Kosong',
+                'Harimau Merah', 'Kosong', 'Paus Biru', 'Kosong',
+                'Serigala Putih', 'Kosong', 'Kelinci Emas', 'Kosong',
+                'Burung Merpati', 'Kosong', 'Ayam Hitam', 'Kosong',
+                'Buaya Hijau', 'Kosong', 'Kuda Hitam', 'Kosong',
+                'Katak Emas', 'Kosong', 'Singa Kuning', 'Kosong'
+            ];
+            const descriptions = [
+                'Singa Laut adalah penjaga laut yang kuat dan tangguh.',
+                'Raga anda masih kosong.',
+                'Macan Garong adalah pemburu malam yang gesit dan menakutkan.',
+                'Raga anda masih kosong.',
+                'Kuda Lumping adalah penari sakti yang penuh semangat dan kegembiraan.',
+                'Raga anda masih kosong.',
+                'Bajing Loncat adalah pencuri ulung yang lincah dan cepat.',
+                'Raga anda masih kosong.',
+                'Ubur-Ubur Danau adalah penghuni danau yang bersinar dalam gelap.',
+                'Raga anda masih kosong.',
+                'Ayam Sore adalah pembawa keberuntungan yang selalu datang di waktu sore.',
+                'Raga anda masih kosong.',
+                'Kucing Lucu selalu menggemaskan dengan tingkah lakunya yang manis.',
+                'Raga anda masih kosong.',
+                'Gajah Perkasa adalah simbol kekuatan dan kebijaksanaan.',
+                'Raga anda masih kosong.',
+                'Burung Hantu adalah penjaga malam yang bijak dan misterius.',
+                'Raga anda masih kosong.',
+                'Ikan Paus adalah raksasa laut yang lembut dan pelindung samudra.',
+                'Raga anda masih kosong.',
+                'Serigala Hitam adalah penjaga hutan yang kuat dan setia.',
+                'Raga anda masih kosong.',
+                'Kelinci Putih adalah pembawa keberuntungan yang lincah dan ceria.',
+                'Raga anda masih kosong.',
+                'Harimau Putih adalah raja hutan yang gagah dan menakutkan.',
+                'Raga anda masih kosong.',
+                'Elang Jawa adalah penjelajah langit yang tangguh dan cepat.',
+                'Raga anda masih kosong.',
+                'Tupai Terbang adalah akrobat ulung yang lincah dan mengagumkan.',
+                'Raga anda masih kosong.',
+                'Buaya Darat adalah penguasa rawa yang kuat dan tak kenal takut.',
+                'Raga anda masih kosong.',
+                'Monyet Pintar adalah makhluk yang cerdas dan penuh trik.',
+                'Raga anda masih kosong.',
+                'Gurita Laut adalah penguasa kedalaman yang cerdik dan serbaguna.',
+                'Raga anda masih kosong.',
+                'Badak Perkasa adalah simbol kekuatan dan ketahanan.',
+                'Raga anda masih kosong.',
+                'Kucing Hutan adalah pemburu malam yang misterius dan tangkas.',
+                'Raga anda masih kosong.',
+                'Burung Merak adalah simbol keindahan dan kemegahan.',
+                'Raga anda masih kosong.',
+                'Singa Putih adalah penjaga hutan yang gagah berani.',
+                'Raga anda masih kosong.',
+                'Cicak Dinding adalah penjaga rumah yang tangkas dan tak terlihat.',
+                'Raga anda masih kosong.',
+                'Anjing Setia adalah teman yang setia dan pelindung keluarga.',
+                'Raga anda masih kosong.',
+                'Katak Hijau adalah makhluk kecil yang membawa hujan dan kesuburan.',
+                'Raga anda masih kosong.',
+                'Banteng Merah adalah simbol kekuatan dan keberanian.',
+                'Raga anda masih kosong.',
+                'Kambing Gunung adalah penjelajah pegunungan yang tangguh.',
+                'Raga anda masih kosong.',
+                'Domba Emas adalah pembawa kemakmuran dan kekayaan.',
+                'Raga anda masih kosong.',
+                'Burung Camar adalah penjelajah lautan yang bebas dan riang.',
+                'Raga anda masih kosong.',
+                'Ikan Lumba-Lumba adalah sahabat manusia yang cerdas dan ramah.',
+                'Raga anda masih kosong.',
+                'Naga Awan adalah penguasa langit yang bijak dan misterius.',
+                'Raga anda masih kosong.',
+                'Angsa Emas adalah simbol keanggunan dan kemewahan.',
+                'Raga anda masih kosong.',
+                'Kelinci Bulan adalah makhluk kecil yang membawa keberuntungan dan kebahagiaan.',
+                'Raga anda masih kosong.',
+                'Singa Biru adalah penjaga hutan yang gagah berani.',
+                'Raga anda masih kosong.',
+                'Tikus Ladang adalah makhluk kecil yang cerdas dan lincah.',
+                'Raga anda masih kosong.',
+                'Merpati Putih adalah simbol perdamaian dan cinta.',
+                'Raga anda masih kosong.',
+                'Kadal Gurun adalah makhluk tangguh yang mampu bertahan dalam kondisi ekstrem.',
+                'Raga anda masih kosong.',
+                'Rubah Perak adalah penjaga malam yang bijaksana dan cerdik.',
+                'Raga anda masih kosong.',
+                'Gajah Terbang adalah simbol kekuatan dan kebijaksanaan yang mampu menjelajahi langit.',
+                'Raga anda masih kosong.',
+                'Kupu-Kupu Raksasa adalah makhluk yang indah dan penuh warna.',
+                'Raga anda masih kosong.',
+                'Ular Emas adalah simbol kekuatan dan ketahanan.',
+                'Raga anda masih kosong.',
+                'Buaya Terbang adalah penjaga rawa yang kuat dan tak kenal takut.',
+                'Raga anda masih kosong.',
+                'Kura-Kura Hitam adalah simbol kebijaksanaan dan ketahanan.',
+                'Raga anda masih kosong.',
+                'Burung Phoenix adalah makhluk legendaris yang bangkit dari abu.',
+                'Raga anda masih kosong.',
+                'Kuda Perak adalah penjelajah padang pasir yang gagah berani.',
+                'Raga anda masih kosong.',
+                'Lebah Raja adalah makhluk kecil yang kuat dan penuh semangat.',
+                'Raga anda masih kosong.',
+                'Laba-Laba Merah adalah makhluk kecil yang cerdik dan cekatan.',
+                'Raga anda masih kosong.',
+                'Kerbau Raksasa adalah simbol kekuatan dan ketahanan.',
+                'Raga anda masih kosong.',
+                'Burung Rajawali adalah penjaga langit yang kuat dan tangguh.',
+                'Raga anda masih kosong.',
+                'Tikus Hutan adalah makhluk kecil yang cerdas dan lincah.',
+                'Raga anda masih kosong.',
+                'Lumba-Lumba Pink adalah sahabat manusia yang cerdas dan ramah.',
+                'Raga anda masih kosong.',
+                'Hiu Putih adalah penjaga lautan yang kuat dan menakutkan.',
+                'Raga anda masih kosong.',
+                'Kucing Ajaib adalah makhluk yang cerdas dan penuh misteri.',
+                'Raga anda masih kosong.',
+                'Gajah Emas adalah simbol kekuatan dan kebijaksanaan.',
+                'Raga anda masih kosong.',
+                'Harimau Merah adalah raja hutan yang gagah dan menakutkan.',
+                'Raga anda masih kosong.',
+                'Paus Biru adalah raksasa laut yang lembut dan pelindung samudra.',
+                'Raga anda masih kosong.',
+                'Serigala Putih adalah penjaga hutan yang kuat dan setia.',
+                'Raga anda masih kosong.',
+                'Kelinci Emas adalah pembawa keberuntungan yang lincah dan ceria.',
+                'Raga anda masih kosong.',
+                'Burung Merpati adalah simbol perdamaian dan cinta.',
+                'Raga anda masih kosong.',
+                'Ayam Hitam adalah pembawa keberuntungan yang selalu datang di waktu malam.',
+                'Raga anda masih kosong.',
+                'Buaya Hijau adalah penguasa rawa yang kuat dan tak kenal takut.',
+                'Raga anda masih kosong.',
+                'Kuda Hitam adalah penjelajah malam yang gagah dan berani.',
+                'Raga anda masih kosong.',
+                'Katak Emas adalah makhluk kecil yang membawa hujan dan kesuburan.',
+                'Raga anda masih kosong.',
+                'Singa Kuning adalah penjaga hutan yang gagah berani.',
+                'Raga anda masih kosong.'
+            ];
+            const index = name.length % khodamNames.length;
+            return { 
+                khodam: `Nama "${name}" Memiliki Khodam: ${khodamNames[index]}`, 
+                description: descriptions[index] 
+            };
+        }
+    </script>
+</body>
+</html>
